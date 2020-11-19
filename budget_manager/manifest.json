@@ -8,8 +8,19 @@
         "48": "icon.jpg",
         "16": "icon.jpg"
     },
+    "options": "options.html",
     "browser_action": {
         "default_popup": "popup.html",
         "default_icon": "icon.jpg"
-    }
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "storage",
+        "notifications",
+        "contextMenus",
+        "tabs"
+    ]
 }
