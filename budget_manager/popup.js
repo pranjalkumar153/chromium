@@ -1,6 +1,6 @@
 $(function() {
     chrome.storage.sync.get(["total", "limit"], function(budget) {
-        if (budget.total) {
+        if (budget.total || parseInt(budget.total) == 0) {
             var total_amount = parseInt(budget.total, 10);
             $("#total_spent_amount").text(total_amount);
         } else if (!(budget.total)) {
