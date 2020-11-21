@@ -15,8 +15,12 @@ $(function() {
     });
     $("#spend_amount").click(function() {
         var newTotal = 0;
+        var d = new Date();
+        var spent_now = "";
+        var total_till_now = 0;
         if ($("#entered_amount").val()) {
             var spent_value = parseInt($("#entered_amount").val(), 10);
+            spent_now = spent_value;
             newTotal += spent_value;
             $("#entered_amount").val("");
         }
@@ -26,6 +30,7 @@ $(function() {
             chrome.storage.sync.set({ "total": newTotal }, function() {
                 $("#total_spent_amount").text(newTotal);
                 $("#entered_amount").val("");
+                total_till_now = newTotal;
             });
             chrome.storage.sync.get(["total", "limit"], function(budget) {
                 var notify = {
@@ -38,6 +43,24 @@ $(function() {
                     chrome.notifications.create(notify);
                 }
             });
+        });
+        // will make an array of this type of object which will fetch all the requirements
+        // for the graph plotting.
+        var spent_obj_information = {
+            date: d,
+            spent_amount: spent_now,
+            total: total_till_now
+        };
+        var spent_data_array = [];
+        // storing the array to chrome store
+        chrome.storage.sync.get("spent_data_array", function(budget) {
+            if (budget.spent_data_array) {
+                spent_data_array = budget.spent_data_array;
+                spent_data_array.push(spent_obj_information);
+            } else {
+                spent_data_array = [spent_obj_information];
+                chrome.storage.sync.set({ "spent_data_array": spent_data_array });
+            }
         });
     });
     $("#set_limit").click(function() {
