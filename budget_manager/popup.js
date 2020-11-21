@@ -18,6 +18,7 @@ $(function() {
         var d = new Date();
         var spent_now = "";
         var total_till_now = 0;
+        var page_url = "";
         if ($("#entered_amount").val()) {
             var spent_value = parseInt($("#entered_amount").val(), 10);
             spent_now = spent_value;
@@ -46,11 +47,16 @@ $(function() {
         });
         // will make an array of this type of object which will fetch all the requirements
         // for the graph plotting.
+        chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+            page_url = tabs[0].url;
+        });
         var spent_obj_information = {
             date: d,
             spent_amount: spent_now,
-            total: total_till_now
+            total: total_till_now,
+            url_of_website: page_url
         };
+        console.log(spent_obj_information);
         var spent_data_array = [];
         // storing the array to chrome store
         chrome.storage.sync.get("spent_data_array", function(budget) {

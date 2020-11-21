@@ -33,6 +33,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                     }
                 });
             });
+            // Adding the functionality for storing record of each spending. 
         }
     }
 });
