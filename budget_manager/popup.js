@@ -27,6 +27,17 @@ $(function() {
                 $("#total_spent_amount").text(newTotal);
                 $("#entered_amount").val("");
             });
+            chrome.storage.sync.get(["total", "limit"], function(budget) {
+                var notify = {
+                    type: "basic",
+                    title: "Limit Exceeded",
+                    message: "Seems like you have exceeded your spending limit!!",
+                    iconUrl: "icon.jpg"
+                };
+                if (parseInt(budget.total) >= parseInt(budget.limit)) {
+                    chrome.notifications.create(notify);
+                }
+            });
         });
     });
     $("#set_limit").click(function() {
@@ -37,5 +48,16 @@ $(function() {
                 $("#set_the_limit").val("");
             });
         }
+        chrome.storage.sync.get(["total", "limit"], function(budget) {
+            var notify = {
+                type: "basic",
+                title: "Limit Exceeded",
+                message: "Seems like you have exceeded your spending limit!!",
+                iconUrl: "icon.jpg"
+            };
+            if (parseInt(budget.total) >= parseInt(budget.limit)) {
+                chrome.notifications.create(notify);
+            }
+        });
     });
 });
