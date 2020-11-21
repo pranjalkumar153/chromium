@@ -34,6 +34,35 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                 });
             });
             // Adding the functionality for storing record of each spending. 
+            var d = new Date(); // sorted
+            var spent_now = ""; //sorted
+            var total_till_now = 0; //sorted
+            var page_url = "";
+            spent_now = parseInt(clickData.selectionText);
+            chrome.storage.sync.get("total", function(budget) {
+                if (budget.total) {
+                    total_till_now = parseInt(budget.total);
+                }
+            });
+            chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                page_url = tabs[0].url;
+            });
+            // Exactly same as that in popup.js
+            var spent_obj_information = {
+                date: d,
+                spent_amount: spent_now,
+                total: total_till_now,
+                url_of_website: page_url
+            };
+            chrome.storage.sync.get("spent_data_array", function(budget) {
+                if (budget.spent_data_array) {
+                    spent_data_array = budget.spent_data_array;
+                    spent_data_array.push(spent_obj_information);
+                } else {
+                    spent_data_array = [spent_obj_information];
+                    chrome.storage.sync.set({ "spent_data_array": spent_data_array });
+                }
+            });
         }
     }
 });
