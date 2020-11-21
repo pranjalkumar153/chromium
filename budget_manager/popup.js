@@ -31,7 +31,7 @@ $(function() {
                 var notify = {
                     type: "basic",
                     title: "Limit Exceeded",
-                    message: "Seems like you have exceeded your spending limit!!",
+                    message: "Seems like you have spent more than your spending limit!!",
                     iconUrl: "icon.jpg"
                 };
                 if (parseInt(budget.total) >= parseInt(budget.limit)) {

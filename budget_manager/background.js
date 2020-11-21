@@ -28,7 +28,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
             type: "basic",
             iconUrl: "icon.jpg",
             title: "Limit Exceeded",
-            message: "Seems like you have exceeded your limit!!"
+            message: "Seems like you have spent more than your spending limit!!"
         };
         if (parseInt(budget.total) >= parseInt(budget.limit)) {
             chrome.notifications.create(notify);
