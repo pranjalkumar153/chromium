@@ -84,6 +84,7 @@ $(function() {
             console.log(page_url);
             if ($("#entered_amount").val()) {
                 spent_now = parseInt($("#entered_amount").val());
+                $("#entered_amount").val("");
                 chrome.storage.sync.get("total", function(budget) {
                     if (budget.total) {
                         total_till_now += parseInt(budget.total);
@@ -98,6 +99,17 @@ $(function() {
                             url_of_website: page_url
                         };
                         console.log(spent_obj_information);
+                        chrome.storage.sync.get("spent_data_array", function(budget) {
+                            var x;
+                            if (budget.spent_data_array) {
+                                x = budget.spent_data_array;
+                                x.push(spent_obj_information);
+                            } else {
+                                x = [spent_obj_information];
+                            }
+                            console.log(x);
+                            chrome.storage.sync.set({ "spent_data_array": x });
+                        });
                     });
                 });
             }
