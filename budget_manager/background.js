@@ -46,6 +46,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
             });
             chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                 page_url = tabs[0].url;
+                console.log(page_url);
             });
             // Exactly same as that in popup.js
             var spent_obj_information = {
@@ -58,6 +59,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                 if (budget.spent_data_array) {
                     spent_data_array = budget.spent_data_array;
                     spent_data_array.push(spent_obj_information);
+                    chrome.storage.sync.set({ "spent_data_array": spent_data_array });
                 } else {
                     spent_data_array = [spent_obj_information];
                     chrome.storage.sync.set({ "spent_data_array": spent_data_array });

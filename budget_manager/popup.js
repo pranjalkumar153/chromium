@@ -49,6 +49,7 @@ $(function() {
         // for the graph plotting.
         chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
             page_url = tabs[0].url;
+            console.log(page_url);
         });
         var spent_obj_information = {
             date: d,
@@ -63,6 +64,7 @@ $(function() {
             if (budget.spent_data_array) {
                 spent_data_array = budget.spent_data_array;
                 spent_data_array.push(spent_obj_information);
+                chrome.storage.sync.set({ "spent_data_array": spent_data_array });
             } else {
                 spent_data_array = [spent_obj_information];
                 chrome.storage.sync.set({ "spent_data_array": spent_data_array });
