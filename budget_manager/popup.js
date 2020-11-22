@@ -108,7 +108,22 @@ $(function() {
                                 x = [spent_obj_information];
                             }
                             console.log(x);
-                            chrome.storage.sync.set({ "spent_data_array": x });
+                            chrome.storage.sync.set({ "spent_data_array": x }, function() {
+                                chrome.storage.sync.get(["total", "limit"], function(budget) {
+                                    if (budget.total || parseInt(budget.total) == 0) {
+                                        var total_amount = parseInt(budget.total, 10);
+                                        $("#total_spent_amount").text(total_amount);
+                                    } else if (!(budget.total)) {
+                                        $("#total_spent_amount").text("NA");
+                                    }
+                                    if (budget.limit) {
+                                        var limit_value = parseInt(budget.limit, 10);
+                                        $("#spending_limit").text(limit_value);
+                                    } else if (!(budget.limit)) {
+                                        $("#spending_limit").text("NA");
+                                    }
+                                });
+                            });
                         });
                     });
                 });
