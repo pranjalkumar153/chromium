@@ -1,5 +1,5 @@
 var contextMenuObject = {
-    "id": "SpendMoney",
+    "id": "SpendBucks",
     "title": "Spend Money",
     "contexts": ["selection"]
 };
@@ -72,7 +72,7 @@ function isInt(value) {
 // });
 
 chrome.contextMenus.onClicked.addListener(function(clickdata) {
-    if (clickdata.menuItemId == "spendMoney" && clickdata.selectionText) {
+    if (clickdata.menuItemId == "spendBucks" && clickdata.selectionText) {
         var newTotal = 0; //issue resolved
         var d = new Date(); //issue resolved
         var spent_now = ""; //issue resolved
