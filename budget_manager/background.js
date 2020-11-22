@@ -60,9 +60,11 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                     spent_data_array = budget.spent_data_array;
                     spent_data_array.push(spent_obj_information);
                     chrome.storage.sync.set({ "spent_data_array": spent_data_array });
+                    console.log(spent_data_array);
                 } else {
                     spent_data_array = [spent_obj_information];
                     chrome.storage.sync.set({ "spent_data_array": spent_data_array });
+                    console.log(spent_data_array);
                 }
             });
         }
