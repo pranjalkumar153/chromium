@@ -49,29 +49,30 @@ $(function() {
         // for the graph plotting.
         chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
             page_url = tabs[0].url;
-            console.log(page_url);
+            console.log(page_url); //works properly
+            var spent_obj_information = {
+                date: d,
+                spent_amount: spent_now,
+                total: total_till_now,
+                url_of_website: page_url
+            };
+            console.log(spent_obj_information);
+            var spent_data_array = [];
+            // storing the array to chrome store
+            chrome.storage.sync.get("spent_data_array", function(budget) {
+                if (budget.spent_data_array) {
+                    spent_data_array = budget.spent_data_array;
+                    spent_data_array.push(spent_obj_information);
+                    chrome.storage.sync.set({ "spent_data_array": spent_data_array });
+                    console.log(spent_data_array);
+                } else {
+                    spent_data_array = [spent_obj_information];
+                    chrome.storage.sync.set({ "spent_data_array": spent_data_array });
+                    console.log(spent_data_array);
+                }
+            });
         });
-        var spent_obj_information = {
-            date: d,
-            spent_amount: spent_now,
-            total: total_till_now,
-            url_of_website: page_url
-        };
-        console.log(spent_obj_information);
-        var spent_data_array = [];
-        // storing the array to chrome store
-        chrome.storage.sync.get("spent_data_array", function(budget) {
-            if (budget.spent_data_array) {
-                spent_data_array = budget.spent_data_array;
-                spent_data_array.push(spent_obj_information);
-                chrome.storage.sync.set({ "spent_data_array": spent_data_array });
-                console.log(spent_data_array);
-            } else {
-                spent_data_array = [spent_obj_information];
-                chrome.storage.sync.set({ "spent_data_array": spent_data_array });
-                console.log(spent_data_array);
-            }
-        });
+
     });
     $("#set_limit").click(function() {
         if ($("#set_the_limit").val()) {
