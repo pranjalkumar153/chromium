@@ -67,7 +67,7 @@ $(function() {
                                     }
                                 });
                             });
-                            chrome.storage.get(["total", "limit"], function(budget) {
+                            chrome.storage.sync.get(["total", "limit"], function(budget) {
                                 if (parseInt(budget.total) >= parseInt(budget.limit)) {
                                     var notifyObj = {
                                         type: "basic",
