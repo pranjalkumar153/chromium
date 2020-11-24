@@ -29,11 +29,14 @@ $(function() {
                     if (budget.total) {
                         total_till_now += parseInt(budget.total);
                     }
+                    var day = d.getDate();
+                    var month = d.getMonth();
+                    var year = d.getFullYear();
                     total_till_now += spent_now;
                     newTotal = total_till_now;
                     chrome.storage.sync.set({ "total": total_till_now }, function() {
                         var spent_obj_information = {
-                            date: d,
+                            date: { dd: day, mm: month, yy: year },
                             spent_amount: spent_now,
                             total: total_till_now,
                             url_of_website: page_url
@@ -64,6 +67,17 @@ $(function() {
                                     }
                                 });
                             });
+                            chrome.storage.get(["total", "limit"], function(budget) {
+                                if (parseInt(budget.total) >= parseInt(budget.limit)) {
+                                    var notifyObj = {
+                                        type: "basic",
+                                        title: "Limit Exceeded!!",
+                                        message: "Seems Like you have spent more than your spending limit!!",
+                                        iconUrl: "icon.jpg"
+                                    };
+                                    chrome.notifications.create(notifyObj);
+                                }
+                            });
                         });
                     });
                 });
@@ -82,7 +96,7 @@ $(function() {
             var notify = {
                 type: "basic",
                 title: "Limit Exceeded",
-                message: "Seems like you have exceeded your spending limit!!",
+                message: "Seems Like you have spent more than your spending limit!!",
                 iconUrl: "icon.jpg"
             };
             if (parseInt(budget.total) >= parseInt(budget.limit)) {

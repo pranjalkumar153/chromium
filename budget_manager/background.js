@@ -1,5 +1,5 @@
 var contextMenuObject = {
-    "id": "SpendNow",
+    "id": "SpendMoney",
     "title": "Spend Money",
     "contexts": ["selection"]
 };
@@ -10,31 +10,46 @@ function isInt(value) {
     return !isNaN(value) && parseInt(value) == value && !isNaN(parseInt(value, 10));
 }
 
-
-chrome.contextMenus.onClicked.addListener(function(clickdata) {
-    if (clickdata.menuItemId == "spendNow" && clickdata.selectionText) {
-        var newTotal = 0; //issue resolved
-        var d = new Date(); //issue resolved
-        var spent_now = ""; //issue resolved
-        var total_till_now = 0; //issue resolved
-        var page_url = ""; //issue resolved
-        if (isInt(clickdata.selectionText)) {
-            chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
-                page_url = tabs[0].url;
-                console.log(page_url);
-                spent_now = parseInt(clickdata.selectionText);
-                chrome.storage.sync.get("total", function(budget) {
-                    if (budget.total) {
-                        newTotal += parseInt(budget.total);
+chrome.contextMenus.onClicked.addListener(function(clickData) {
+    if (clickData.menuItemId == "SpendMoney" && clickData.selectionText) {
+        if (isInt(clickData.selectionText)) {
+            chrome.storage.sync.get(["limit", "total"], function(budget) {
+                var newTotal = 0;
+                if (budget.total) {
+                    newTotal += parseInt(budget.total);
+                }
+                newTotal += parseInt(clickData.selectionText);
+                chrome.storage.sync.set({ "total": newTotal }, function() {
+                    var notificationObject = {
+                        type: "basic",
+                        title: "Limit Exceeded!!",
+                        message: "Seems Like you have spent more than your spending limit!!",
+                        iconUrl: "icon.jpg"
+                    };
+                    if (parseInt(budget.limit) <= parseInt(budget.total)) {
+                        chrome.notifications.create(notificationObject, function() {
+                            console.log("Notified!!");
+                        });
                     }
-                    newTotal += parseInt(clickdata.selectionText);
-                    total_till_now = newTotal;
+                });
+                // var newTotal = 0; //sorted
+                var d = new Date(); //sorted
+                var day = d.getDate();
+                var month = d.getMonth();
+                var year = d.getFullYear();
+                var spent_now = parseInt(clickData.selectionText);
+                var total_till_now = newTotal; //sorted
+                var page_url = ""; //sorted
+                chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
+                    page_url = tabs[0].url;
+                    console.log(page_url);
                     var spent_obj_information = {
-                        date: d,
+                        date: { dd: day, mm: month, yy: year },
                         spent_amount: spent_now,
                         total: total_till_now,
                         url_of_website: page_url
                     };
+                    console.log(spent_obj_information);
                     chrome.storage.sync.get("spent_data_array", function(budget) {
                         var x;
                         if (budget.spent_data_array) {
@@ -45,7 +60,6 @@ chrome.contextMenus.onClicked.addListener(function(clickdata) {
                         }
                         console.log(x);
                         chrome.storage.sync.set({ "spent_data_array": x });
-                        chrome.storage.sync.set({ "total": newTotal });
                     });
                 });
             });
