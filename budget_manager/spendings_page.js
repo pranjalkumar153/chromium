@@ -1,3 +1,9 @@
+var dat;
+chrome.storage.sync.get("spent_data_array", function(budget) {
+    dat = budget.spent_data_array;
+    console.log(dat);
+});
+
 window.onload = function() {
     var dataPoints = [];
     var stockChart = new CanvasJS.StockChart("stockChartContainer", {
@@ -14,16 +20,18 @@ window.onload = function() {
         }],
         navigator: {
             slider: {
-                minimum: new Date(2015, 0, 01),
-                maximum: new Date(2016, 0, 01)
+                minimum: new Date(),
+                maximum: new Date()
             }
         }
     });
-    $.getJSON("usdeur.json", function(data) {
+    console.log(dat);
+    console.log("From window.onLoad");
+    $.getJSON(dat, function(data) {
         for (var i = 0; i < data.length; i++) {
             dataPoints.push({
-                x: new Date(data[i].date),
-                y: Number(data[i].price)
+                x: new Date(data[i].date.yy, data[i].date.mm, data[i].date.dd),
+                y: Number(data[i].spent_amount)
             });
         }
         stockChart.render();
