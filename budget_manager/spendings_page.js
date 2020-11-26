@@ -1,8 +1,9 @@
-var dat;
-chrome.storage.sync.get("spent_data_array", function(budget) {
-    dat = budget.spent_data_array;
-    console.log(dat);
-});
+// var dat;
+// chrome.storage.sync.get("spent_data_array", function(budget) {
+//     dat = budget.spent_data_array;
+//     dat = JSON.stringify(dat);
+//     console.log(dat);
+// });
 
 window.onload = function() {
     var dataPoints = [];
@@ -25,9 +26,9 @@ window.onload = function() {
             }
         }
     });
-    console.log(dat);
+    //console.log(dat);
     console.log("From window.onLoad");
-    $.getJSON(dat, function(data) {
+    $.getJSON("usdeur.json", function(data) {
         for (var i = 0; i < data.length; i++) {
             dataPoints.push({
                 x: new Date(data[i].date.yy, data[i].date.mm, data[i].date.dd),
