@@ -32,11 +32,14 @@ $(function() {
                     var day = d.getDate();
                     var month = d.getMonth();
                     var year = d.getFullYear();
+                    var hh = d.getHours();
+                    var min = d.getMinutes();
+                    var secs = d.getSeconds();
                     total_till_now += spent_now;
                     newTotal = total_till_now;
                     chrome.storage.sync.set({ "total": total_till_now }, function() {
                         var spent_obj_information = {
-                            date: { dd: day, mm: month, yy: year },
+                            date: { dd: day, mm: month, yy: year, hrs: hh, mins: min, ss: secs },
                             spent_amount: spent_now,
                             total: total_till_now,
                             url_of_website: page_url

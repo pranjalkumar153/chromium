@@ -37,6 +37,9 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                 var day = d.getDate();
                 var month = d.getMonth();
                 var year = d.getFullYear();
+                var hh = d.getHours();
+                var min = d.getMinutes();
+                var secs = d.getSeconds();
                 var spent_now = parseInt(clickData.selectionText);
                 var total_till_now = newTotal; //sorted
                 var page_url = ""; //sorted
@@ -44,7 +47,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                     page_url = tabs[0].url;
                     console.log(page_url);
                     var spent_obj_information = {
-                        date: { dd: day, mm: month, yy: year },
+                        date: { dd: day, mm: month, yy: year, hrs: hh, mins: min, ss: secs },
                         spent_amount: spent_now,
                         total: total_till_now,
                         url_of_website: page_url
