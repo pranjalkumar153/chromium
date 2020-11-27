@@ -5,36 +5,46 @@
 //     console.log(dat);
 // });
 
+var data_JSON;
+
 window.onload = function() {
-    var dataPoints = [];
-    var stockChart = new CanvasJS.StockChart("stockChartContainer", {
-        title: {
-            text: "Exchange Rate for EUR to USD"
-        },
-        charts: [{
-            data: [{
-                type: "splineArea",
-                color: "#3698C5",
-                yValueFormatString: "€1 = $#,###.##",
-                dataPoints: dataPoints
-            }]
-        }],
-        navigator: {
-            slider: {
-                minimum: new Date(),
-                maximum: new Date()
+    chrome.storage.sync.get("spent_data_array", function(budget) {
+        var x = budget.spent_data_array;
+        console.log("from chrome API: ");
+        console.log(x);
+        console.log("from chrome API: ");
+        data_JSON = JSON.stringify(x);
+        var dataPoints = [];
+        var stockChart = new CanvasJS.StockChart("stockChartContainer", {
+            title: {
+                text: "Exchange Rate for EUR to USD"
+            },
+            charts: [{
+                data: [{
+                    type: "splineArea",
+                    color: "#3698C5",
+                    yValueFormatString: "€1 = $#,###.##",
+                    dataPoints: dataPoints
+                }]
+            }],
+            navigator: {
+                slider: {
+                    minimum: new Date(),
+                    maximum: new Date()
+                }
             }
-        }
+        });
+        //console.log(dat);
+        console.log("From window.onLoad");
+        $.getJSON(data_JSON, function(data) {
+            for (var i = 0; i < data.length; i++) {
+                dataPoints.push({
+                    x: new Date(data[i].date.yy, data[i].date.mm, data[i].date.dd),
+                    y: Number(data[i].spent_amount)
+                });
+            }
+            stockChart.render();
+        });
     });
-    //console.log(dat);
-    console.log("From window.onLoad");
-    $.getJSON("usdeur.json", function(data) {
-        for (var i = 0; i < data.length; i++) {
-            dataPoints.push({
-                x: new Date(data[i].date.yy, data[i].date.mm, data[i].date.dd),
-                y: Number(data[i].spent_amount)
-            });
-        }
-        stockChart.render();
-    });
+
 };
