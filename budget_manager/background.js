@@ -78,3 +78,33 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
 // 5. Others
 
 // Knowledge of regex expression is required.
+// And file handling with javascript
+
+
+//separating out data for Flipkart.
+var flipkart = [];
+var Amazon = [];
+var Myntra = [];
+var Snapdeal = [];
+var others = [];
+
+chrome.storage.sync.get("spent_data_array", function(budget) {
+    var x = budget.spent_data_array;
+    for (var i = 0; i < x.length; i++) {
+        if (RegExp("/www.flipkart.com/").test(x[i].url_of_website)) {
+            flipkart.push(x[i]);
+        } else if (RegExp("/www.amazon.in/").test(x[i].url_of_website)) {
+            Amazon.push(x[i]);
+        } else if (RegExp("/www.mytra.com/").test(x[i].url_of_website)) {
+            Myntra.push(x[i]);
+        } else if (RegExp("/www.snapdeal.com/").test(x[i].url_of_website)) {
+            Snapdeal.push(x[i]);
+        } else others.push(x[i]);
+    }
+});
+
+console.log(flipkart);
+console.log(Amazon);
+console.log(Myntra);
+console.log(Snapdeal);
+console.log(others);
