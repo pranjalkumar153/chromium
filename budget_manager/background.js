@@ -69,3 +69,12 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
         }
     }
 });
+
+// The websites which will host data are as follows:
+// 1. Flipkart
+// 2. Amazon
+// 3. Myntra
+// 4. Snapdeal
+// 5. Others
+
+// Knowledge of regex expression is required.
