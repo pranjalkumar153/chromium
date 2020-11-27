@@ -103,3 +103,4 @@ chrome.storage.sync.get("spent_data_array", function(budget) {
     }
 });
 // Learn file handling in Javascript to continue further.
+// Larn chrome API fileSystem.
