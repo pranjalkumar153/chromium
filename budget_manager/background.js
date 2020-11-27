@@ -102,9 +102,4 @@ chrome.storage.sync.get("spent_data_array", function(budget) {
         } else others.push(x[i]);
     }
 });
-
-console.log(flipkart);
-console.log(Amazon);
-console.log(Myntra);
-console.log(Snapdeal);
-console.log(others);
+// Learn file handling in Javascript to continue further.
