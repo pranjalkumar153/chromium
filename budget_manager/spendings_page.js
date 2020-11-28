@@ -41,8 +41,8 @@
 // };
 window.onload = function() {
     var dataPoints = [];
-    chrome.storage.sync.get("spent_data_array", function(budget) {
-        var x = budget.spent_data_array;
+    chrome.storage.sync.get("spent_data_array_graph", function(budget) {
+        var x = budget.spent_data_array_graph;
         for (var i = 0; i < x.length; i++) {
             dataPoints.push({
                 x: new Date(x[i].date.yy, x[i].date.mm, x[i].date.dd),

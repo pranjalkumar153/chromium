@@ -1,6 +1,6 @@
 function resolve_for_graph(arr) {
     var arr_new = [];
-    if (arr.length == 0) {
+    if (!arr) {
         return [];
     } else {
         arr_new.push(arr[0]);
@@ -13,6 +13,7 @@ function resolve_for_graph(arr) {
                 arr_new.push(arr[i]);
             }
         }
+        return arr_new;
     }
 }
 // spent_data_array: spent_data_array_graph
