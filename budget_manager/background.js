@@ -101,8 +101,14 @@ chrome.storage.sync.get("spent_data_array", function(budget) {
             Snapdeal.push(x[i]);
         } else others.push(x[i]);
     }
-    x = JSON.stringify(x);
-    console.log(x);
+    chrome.storage.sync.set({ "flipkart": flipkart });
+    chrome.storage.sync.set({ "amazon": Amazon });
+    chrome.storage.sync.set({ "myntra": Myntra });
+    chrome.storage.sync.set({ "others": others });
 });
 // Learn file handling in Javascript to continue further.
 // Larn chrome API fileSystem.
+
+// chrome.storage.sync.get("flipkart", function(budget) {
+//     console.log(budget.amazon);
+// });

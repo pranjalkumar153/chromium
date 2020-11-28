@@ -107,4 +107,33 @@ $(function() {
             }
         });
     });
+    // spent_data_array: spent_data_array_graph
+    // flipkart: flipkart_graph
+    // amazon: amazon_graph
+    // myntra: amazon_graph
+    // snapdeal: snapdeal_graph
+    // others: others_graph
+    chrome.storage.sync.get("spent_data_array", function(budget) {
+        var x = budget.spent_data_array;
+        for (var i = 0; i < x.length; i++) {
+            if (RegExp("/www.flipkart.com/").test(x[i].url_of_website)) {
+                flipkart.push(x[i]);
+            } else if (RegExp("/www.amazon.in/").test(x[i].url_of_website)) {
+                Amazon.push(x[i]);
+            } else if (RegExp("/www.mytra.com/").test(x[i].url_of_website)) {
+                Myntra.push(x[i]);
+            } else if (RegExp("/www.snapdeal.com/").test(x[i].url_of_website)) {
+                Snapdeal.push(x[i]);
+            } else others.push(x[i]);
+        }
+        chrome.storage.sync.set({ "flipkart": flipkart }, function() {
+            console.log("from set");
+            console.log(flipkart);
+        });
+        chrome.storage.sync.set({ "amazon": Amazon });
+        chrome.storage.sync.set({ "myntra": Myntra });
+        chrome.storage.sync.set({ "snapdeal": Snapdeal });
+        chrome.storage.sync.set({ "others": others });
+    });
+
 });
