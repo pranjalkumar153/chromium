@@ -42,7 +42,13 @@
 window.onload = function() {
     var dataPoints = [];
     chrome.storage.sync.get("spent_data_array", function(budget) {
-        var x = JSON.stringify(budget.spent_data_array);
+        var x = budget.spent_data_array;
+        for (var i = 0; i < x.length; i++) {
+            dataPoints.push({
+                x: new Date(x[i].date.yy, x[i].date.mm, x[i].date.dd),
+                y: Number(x[i].spent_amount)
+            });
+        }
         var stockChart = new CanvasJS.StockChart("stockChartContainer", {
             title: {
                 text: "Exchange Rate for EUR to USD"
@@ -62,17 +68,6 @@ window.onload = function() {
                 }
             }
         });
-        x = JSON.parse(x);
-        console.log(x);
-        $.getJSON(x, function(data) {
-            for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
-                dataPoints.push({
-                    x: new Date(data[i].yy, data[i].mm, data[i].dd),
-                    y: Number(data[i].spent_amount)
-                });
-            }
-            stockChart.render();
-        });
+        stockChart.render();
     });
 };
