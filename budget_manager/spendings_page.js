@@ -41,15 +41,15 @@
 // };
 window.onload = function() {
     var dataPoints = [];
-    chrome.storage.sync.get("spent_data_array_graph", function(budget) {
-        var x = budget.spent_data_array_graph;
+    chrome.storage.sync.get("others_graph", function(budget) {
+        var x = budget.others_graph;
         for (var i = 0; i < x.length; i++) {
             dataPoints.push({
                 x: new Date(x[i].date.yy, x[i].date.mm, x[i].date.dd),
                 y: Number(x[i].spent_amount)
             });
         }
-        var stockChart = new CanvasJS.StockChart("stockChartContainer", {
+        var stockChart = new CanvasJS.StockChart("others_graph", {
             title: {
                 text: "Exchange Rate for EUR to USD"
             },
@@ -57,7 +57,7 @@ window.onload = function() {
                 data: [{
                     type: "splineArea",
                     color: "#3698C5",
-                    yValueFormatString: "€1 = $#,###.##",
+                    yValueFormatString: "Spent = Rs #,###.##",
                     dataPoints: dataPoints
                 }]
             }],
