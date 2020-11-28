@@ -17,6 +17,9 @@
         "scripts": ["background.js"],
         "persistent": false
     },
+    "web_accessible_resources": [
+        "usdeur.json"
+    ],
     "permissions": [
         "storage",
         "notifications",

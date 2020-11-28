@@ -101,6 +101,8 @@ chrome.storage.sync.get("spent_data_array", function(budget) {
             Snapdeal.push(x[i]);
         } else others.push(x[i]);
     }
+    x = JSON.stringify(x);
+    console.log(x);
 });
 // Learn file handling in Javascript to continue further.
 // Larn chrome API fileSystem.
