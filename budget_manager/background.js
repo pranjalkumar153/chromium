@@ -28,12 +28,12 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                     };
                     if (parseInt(budget.limit) <= parseInt(budget.total)) {
                         chrome.notifications.create(notificationObject, function() {
-                            console.log("Notified!!");
+                            //  console.log("Notified!!");
                         });
                     }
                 });
-                // var newTotal = 0; //sorted
-                var d = new Date(); //sorted
+
+                var d = new Date();
                 var day = d.getDate();
                 var month = d.getMonth();
                 var year = d.getFullYear();
@@ -41,11 +41,11 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                 var min = d.getMinutes();
                 var secs = d.getSeconds();
                 var spent_now = parseInt(clickData.selectionText);
-                var total_till_now = newTotal; //sorted
-                var page_url = ""; //sorted
+                var total_till_now = newTotal;
+                var page_url = "";
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
                     page_url = tabs[0].url;
-                    console.log(page_url);
+                    // console.log(page_url);
                     var spent_obj_information = {
                         date: { dd: day, mm: month, yy: year, hrs: hh, mins: min, ss: secs },
                         spent_amount: spent_now,
@@ -61,7 +61,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                         } else {
                             x = [spent_obj_information];
                         }
-                        console.log(x);
+                        // console.log(x);
                         chrome.storage.sync.set({ "spent_data_array": x }, function() {
                             var obj = x[x.length - 1];
                             if (RegExp("/www.flipkart.com/").test(obj.url_of_website)) {
@@ -74,7 +74,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                                         x = [obj];
                                     }
                                     chrome.storage.sync.set({ "flipkart": x });
-                                    console.log(x);
+                                    // console.log(x);
                                 });
                             } else if (RegExp("/www.amazon.in/").test(obj.url_of_website)) {
                                 chrome.storage.sync.get("amazon", function(budget) {
@@ -86,7 +86,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                                         x = [obj];
                                     }
                                     chrome.storage.sync.set({ "amazon": x });
-                                    console.log(x);
+                                    // console.log(x);
                                 });
                             } else if (RegExp("/www.myntra.com/").test(obj.url_of_website)) {
                                 chrome.storage.sync.get("myntra", function(budget) {
@@ -98,7 +98,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                                         x = [obj];
                                     }
                                     chrome.storage.sync.set({ "myntra": x });
-                                    console.log(x);
+                                    // console.log(x);
                                 });
                             } else if (RegExp("/www.snapdeal.com/").test(obj.url_of_website)) {
                                 chrome.storage.sync.get("snapdeal", function(budget) {
@@ -110,7 +110,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                                         x = [obj];
                                     }
                                     chrome.storage.sync.set({ "snapdeal": x });
-                                    console.log(x);
+                                    // console.log(x);
                                 });
                             } else {
                                 chrome.storage.sync.get("others", function(budget) {
@@ -122,7 +122,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                                         x = [obj];
                                     }
                                     chrome.storage.sync.set({ "others": x });
-                                    console.log(x);
+                                    // console.log(x);
                                 });
                             }
                         });
@@ -132,10 +132,3 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
         }
     }
 });
-
-// The websites which will host data are as follows:
-// 1. Flipkart
-// 2. Amazon
-// 3. Myntra
-// 4. Snapdeal
-// 5. Others

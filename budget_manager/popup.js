@@ -14,14 +14,14 @@ $(function() {
         }
     });
     $("#spend_amount").click(function() {
-        var newTotal = 0; //sorted
-        var d = new Date(); //sorted
-        var spent_now = ""; //sorted
-        var total_till_now = 0; //sorted
-        var page_url = ""; //sorted
+        var newTotal = 0;
+        var d = new Date();
+        var spent_now = "";
+        var total_till_now = 0;
+        var page_url = "";
         chrome.tabs.query({ active: true, currentWindow: true }, function(tabs) {
             page_url = tabs[0].url;
-            console.log(page_url);
+            // console.log(page_url);
             if ($("#entered_amount").val()) {
                 spent_now = parseInt($("#entered_amount").val());
                 $("#entered_amount").val("");
@@ -44,7 +44,7 @@ $(function() {
                             total: total_till_now,
                             url_of_website: page_url
                         };
-                        console.log(spent_obj_information);
+                        // console.log(spent_obj_information);
                         chrome.storage.sync.get("spent_data_array", function(budget) {
                             var x;
                             if (budget.spent_data_array) {
@@ -53,7 +53,7 @@ $(function() {
                             } else {
                                 x = [spent_obj_information];
                             }
-                            console.log(x);
+                            // console.log(x);
                             chrome.storage.sync.set({ "spent_data_array": x }, function() {
                                 chrome.storage.sync.get(["total", "limit"], function(budget) {
                                     if (budget.total || parseInt(budget.total) == 0) {
@@ -102,7 +102,7 @@ $(function() {
                                                 x = [obj];
                                             }
                                             chrome.storage.sync.set({ "flipkart": x });
-                                            console.log(x);
+                                            // console.log(x);
                                         });
                                     } else if (RegExp("/www.amazon.in/").test(obj.url_of_website)) {
                                         chrome.storage.sync.get("amazon", function(budget) {
@@ -114,7 +114,7 @@ $(function() {
                                                 x = [obj];
                                             }
                                             chrome.storage.sync.set({ "amazon": x });
-                                            console.log(x);
+                                            // console.log(x);
                                         });
                                     } else if (RegExp("/www.myntra.com/").test(obj.url_of_website)) {
                                         chrome.storage.sync.get("myntra", function(budget) {
@@ -126,7 +126,7 @@ $(function() {
                                                 x = [obj];
                                             }
                                             chrome.storage.sync.set({ "myntra": x });
-                                            console.log(x);
+                                            // console.log(x);
                                         });
                                     } else if (RegExp("/www.snapdeal.com/").test(obj.url_of_website)) {
                                         chrome.storage.sync.get("snapdeal", function(budget) {
@@ -138,7 +138,7 @@ $(function() {
                                                 x = [obj];
                                             }
                                             chrome.storage.sync.set({ "snapdeal": x });
-                                            console.log(x);
+                                            // console.log(x);
                                         });
                                     } else {
                                         chrome.storage.sync.get("others", function(budget) {
@@ -150,7 +150,7 @@ $(function() {
                                                 x = [obj];
                                             }
                                             chrome.storage.sync.set({ "others": x });
-                                            console.log(x);
+                                            // console.log(x);
                                         });
                                     }
                                 });
