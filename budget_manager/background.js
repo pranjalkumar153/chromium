@@ -66,7 +66,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                             var obj = x[x.length - 1];
                             if (RegExp("/www.flipkart.com/").test(obj.url_of_website)) {
                                 chrome.storage.sync.get("flipkart", function(budget) {
-                                    var x;
+                                    var x = [];
                                     if (budget.flipkart) {
                                         x = budget.fipkart;
                                         x.push(obj);
