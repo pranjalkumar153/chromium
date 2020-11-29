@@ -13,4 +13,16 @@ $(function() {
             $("#set_the_limit").val("");
         });
     });
+    $("#spendings").click(function() {
+        chrome.storage.sync.set({
+            "total": 0,
+            "limit": 0,
+            "spent_data_array": [],
+            "flipkart": [],
+            "amazon": [],
+            "myntra": [],
+            "snapdeal": [],
+            "others": []
+        });
+    });
 });

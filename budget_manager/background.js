@@ -68,7 +68,7 @@ chrome.contextMenus.onClicked.addListener(function(clickData) {
                                 chrome.storage.sync.get("flipkart", function(budget) {
                                     var x = [];
                                     if (budget.flipkart) {
-                                        x = budget.fipkart;
+                                        x = budget.flipkart;
                                         x.push(obj);
                                     } else {
                                         x = [obj];

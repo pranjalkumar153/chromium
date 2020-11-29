@@ -78,7 +78,7 @@ window.onload = function() {
 
         var stockChartFlipkart = new CanvasJS.StockChart("flipkart_graph", {
             title: {
-                text: "Exchange Rate for EUR to USD"
+                text: "Spendings on Flipkart:"
             },
             charts: [{
                 data: [{
@@ -111,7 +111,7 @@ window.onload = function() {
 
         var stockChartAmazon = new CanvasJS.StockChart("amazon_graph", {
             title: {
-                text: "Exchange Rate for EUR to USD"
+                text: "Spendings on Amazon:"
             },
             charts: [{
                 data: [{
@@ -144,7 +144,7 @@ window.onload = function() {
 
         var stockChartSnapdeal = new CanvasJS.StockChart("snapdeal_graph", {
             title: {
-                text: "Exchange Rate for EUR to USD"
+                text: "Spendings on Snapdeal:"
             },
             charts: [{
                 data: [{
@@ -177,7 +177,7 @@ window.onload = function() {
 
         var stockChartMyntra = new CanvasJS.StockChart("myntra_graph", {
             title: {
-                text: "Exchange Rate for EUR to USD"
+                text: "Spendings on Myntra:"
             },
             charts: [{
                 data: [{
@@ -210,7 +210,7 @@ window.onload = function() {
 
         var stockChartOthers = new CanvasJS.StockChart("others_graph", {
             title: {
-                text: "Exchange Rate for EUR to USD"
+                text: "Spendings on other websites:"
             },
             charts: [{
                 data: [{
