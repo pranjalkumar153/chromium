@@ -14,7 +14,7 @@
         "default_icon": "icon.jpg"
     },
     "background": {
-        "scripts": ["background.js"],
+        "scripts": ["background.js", "graph.js"],
         "persistent": false
     },
     "permissions": [
