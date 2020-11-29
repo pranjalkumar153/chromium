@@ -41,15 +41,18 @@
 // };
 window.onload = function() {
     var dataPoints = [];
-    chrome.storage.sync.get("others_graph", function(budget) {
-        var x = budget.others_graph;
-        for (var i = 0; i < x.length; i++) {
-            dataPoints.push({
-                x: new Date(x[i].date.yy, x[i].date.mm, x[i].date.dd),
-                y: Number(x[i].spent_amount)
-            });
+    chrome.storage.sync.get("flipkart_graph", function(budget) {
+        var x = budget.flipkart_graph;
+        if (x) {
+            for (var i = 0; i < x.length; i++) {
+                dataPoints.push({
+                    x: new Date(x[i].date.yy, x[i].date.mm, x[i].date.dd),
+                    y: Number(x[i].spent_amount)
+                });
+            }
         }
-        var stockChart = new CanvasJS.StockChart("others_graph", {
+
+        var stockChart = new CanvasJS.StockChart("flipkart_graph", {
             title: {
                 text: "Exchange Rate for EUR to USD"
             },
