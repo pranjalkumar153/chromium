@@ -5,14 +5,14 @@ $(function() {
     chrome.storage.sync.get(["subject_list"], function(res) {
         if (!res.subject_list) {
             $("#attendence_record").html("<h6>No record available!!</h6>");
-            location.reload();
         } else {
             var sub_list = res.subject_list;
             var val = "<table><tr><th> Subject </th><th> Classes Attended </th><th> Total Classes Held </th><th>Mark Attendence</th > <th> Mark Absent </th></tr> ";
             for (var i = 0; i < sub_list.length; i++) {
-                val += "<tr><td>" + sub_list[i] + "</td>";
-                val += "<td>0</td>";
-                val += "<td>0</td><tr>";
+                val += "<tr><td>" + sub_list[i].sub_name + "</td>";
+                val += "<td>" + sub_list[i].classes_attended + "</td>";
+                val += "<td>" + sub_list[i].classes_held + "</td>";
+                val += "<td>" + "<span class='glyphicon glyphicon-ok' style='color:green;'></span></td></tr>";
             }
             val += "</table>";
             $("#attendence_record").html(val);
@@ -26,9 +26,16 @@ $(function() {
         chrome.storage.sync.get(["subject_list"], function(res) {
             var sub_list;
             if (sub_name != "" && sub_name) {
+                var classes_attended = 0;
+                var classes_held = 0;
+                var subject = {
+                    sub_name: sub_name,
+                    classes_attended: classes_attended,
+                    classes_held: classes_held
+                };
                 if (!res.subject_list) {
                     sub_list = [];
-                    sub_list.push(sub_name);
+                    sub_list.push(subject);
                     chrome.storage.sync.set({ "subject_list": sub_list }, function() {
                         console.log("New Subject Added!!");
                         alert("New Subject Added Successfully!!");
@@ -38,13 +45,13 @@ $(function() {
                     var f = true;
                     // handling duplicates
                     for (var i = 0; i < sub_list.length; i++) {
-                        if (sub_name == sub_list[i]) {
+                        if (sub_name == sub_list[i].sub_name) {
                             f = false;
                             break;
                         }
                     }
                     if (f) {
-                        sub_list.push(sub_name);
+                        sub_list.push(subject);
                         chrome.storage.sync.set({ "subject_list": sub_list }, function() {
                             console.log("New Subject Added!!");
                             alert("New Subject Added Successfully!!");
@@ -73,7 +80,7 @@ $(function() {
                 var f = false;
                 var aux_sub_list = [];
                 for (var i = 0; i < sub_list.length; i++) {
-                    if (sub_name != sub_list[i]) {
+                    if (sub_name != sub_list[i].sub_name) {
                         aux_sub_list.push(sub_list[i]);
                     } else {
                         f = true;
@@ -91,6 +98,16 @@ $(function() {
             }
         });
         $("#subject_name").val("");
+        location.reload();
+    });
+    //=====================================================================================//
+    //CLEAR BUTTON FUNCTIONALITY                                                           //
+    //=====================================================================================//
+    $("#clear_data").click(function() {
+        chrome.storage.sync.clear(function() {
+            console.log("Data Cleared Successfully!!");
+            alert("Data Cleared Successfully!!");
+        });
         location.reload();
     });
 });
