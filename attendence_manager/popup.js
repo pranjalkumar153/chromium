@@ -1,4 +1,7 @@
 $(function() {
+    //=====================================================================================//
+    //ADD BUTTON FUNCTIONALITY                                                             //
+    //=====================================================================================//
     $("#add_subject").click(function() {
         var sub_name = $("subject_name").val();
         chrome.storage.sync.get(["subject_list"], function(res) {
