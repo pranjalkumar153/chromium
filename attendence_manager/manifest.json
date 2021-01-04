@@ -8,14 +8,10 @@
         "48": "attendence.jpg",
         "16": "attendence.jpg"
     },
-    "options_page": "options.html",
+
     "browser_action": {
         "default_popup": "popup.html",
-        "default_icon": "icon.jpg"
-    },
-    "background": {
-        "scripts": ["background.js"],
-        "persistent": false
+        "default_icon": "attendence.jpg"
     },
     "permissions": [
         "storage",
