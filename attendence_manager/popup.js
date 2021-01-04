@@ -1,5 +1,19 @@
 $(function() {
-
+    //=====================================================================================//
+    //INITIAL CONTENT OF THE PAGE                                                            //
+    //=====================================================================================//
+    chrome.storage.sync.get(["subject_list"], function(res) {
+        if (!res.subject_list) {
+            $("#attendence_record").html("<h6>No record available!!</h6>");
+        } else {
+            var sub_list = res.subject_list;
+            var val = "<h5>Your attendence record!!</h5>";
+            for (var i = 0; i < sub_list.length; i++) {
+                val += "<h6>" + sub_list[i] + "</h6><br>";
+            }
+            $("#attendence_record").html(val);
+        }
+    });
     //=====================================================================================//
     //ADD BUTTON FUNCTIONALITY                                                             //
     //=====================================================================================//
