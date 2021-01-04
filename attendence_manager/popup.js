@@ -43,7 +43,7 @@ $(function() {
     //REMOVE BUTTON FUNCTIONALITY                                                             //
     //=====================================================================================//
     $("#remove_subject").click(function() {
-        var sub_name = ("#subject_name").val();
+        var sub_name = $("#subject_name").val();
         chrome.storage.sync.get(["subject_list"], function(res) {
             var sub_list = res.subject_list;
             if (!sub_list) {
