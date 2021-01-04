@@ -1,5 +1,24 @@
 $(function() {
     //=====================================================================================//
+    //INITIAL CONTENT OF THE PAGE                                                          //
+    //=====================================================================================//
+    chrome.storage.sync.get(["subject_list"], function(res) {
+        if (!res.subject_list) {
+            $("#attendence_record").html("<h6>No record available!!</h6>");
+            location.reload();
+        } else {
+            var sub_list = res.subject_list;
+            var val = "<table><tr><th> Subject </th><th> Classes Attended </th><th> Total Classes Held </th><th>Mark Attendence</th > <th> Mark Absent </th></tr> ";
+            for (var i = 0; i < sub_list.length; i++) {
+                val += "<tr><td>" + sub_list[i] + "</td>";
+                val += "<td>0</td>";
+                val += "<td>0</td><tr>";
+            }
+            val += "</table>";
+            $("#attendence_record").html(val);
+        }
+    });
+    //=====================================================================================//
     //ADD BUTTON FUNCTIONALITY                                                             //
     //=====================================================================================//
     $("#add_subject").click(function() {
