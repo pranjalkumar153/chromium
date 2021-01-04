@@ -16,12 +16,24 @@ $(function() {
                     });
                 } else {
                     sub_list = res.subject_list;
-                    sub_list.push(sub_name);
-                    chrome.storage.sync.set({ "subject_list": sub_list }, function() {
-                        console.log("New Subject Added!!");
-                        alert("New Subject Added Successfully!!");
-                    });
-
+                    var f = true;
+                    // handling duplicates
+                    for (var i = 0; i < sub_list.length; i++) {
+                        if (sub_name == sub_list[i]) {
+                            f = false;
+                            break;
+                        }
+                    }
+                    if (f) {
+                        sub_list.push(sub_name);
+                        chrome.storage.sync.set({ "subject_list": sub_list }, function() {
+                            console.log("New Subject Added!!");
+                            alert("New Subject Added Successfully!!");
+                        });
+                    } else {
+                        alert("The subject already exists!!");
+                        console.log("The subject already exists!!");
+                    }
                 }
             }
             $("#subject_name").val("");
