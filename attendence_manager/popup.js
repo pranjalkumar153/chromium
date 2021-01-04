@@ -40,7 +40,7 @@ $(function() {
         });
     });
     //=====================================================================================//
-    //REMOVE BUTTON FUNCTIONALITY                                                             //
+    //REMOVE BUTTON FUNCTIONALITY                                                          //
     //=====================================================================================//
     $("#remove_subject").click(function() {
         var sub_name = $("#subject_name").val();
