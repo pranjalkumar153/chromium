@@ -1,0 +1,24 @@
+{
+    "manifest_version": 2,
+    "version": "1.0",
+    "name": "Attendence Manager",
+    "description": "An extension to keep your attendence on track",
+    "icons": {
+        "128": "attendence.jpg",
+        "48": "attendence.jpg",
+        "16": "attendence.jpg"
+    },
+    "options_page": "options.html",
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.jpg"
+    },
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "storage",
+        "notifications"
+    ]
+}
