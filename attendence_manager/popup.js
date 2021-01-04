@@ -3,7 +3,7 @@ $(function() {
     //ADD BUTTON FUNCTIONALITY                                                             //
     //=====================================================================================//
     $("#add_subject").click(function() {
-        var sub_name = $("subject_name").val();
+        var sub_name = $("#subject_name").val();
         chrome.storage.sync.get(["subject_list"], function(res) {
             var sub_list;
             if (sub_name != "" && sub_name) {
@@ -24,7 +24,39 @@ $(function() {
 
                 }
             }
+            $("#subject_name").val("");
         });
     });
-    $("#remove_subject").click(function() {});
+    //=====================================================================================//
+    //REMOVE BUTTON FUNCTIONALITY                                                             //
+    //=====================================================================================//
+    $("#remove_subject").click(function() {
+        var sub_name = ("#subject_name").val();
+        chrome.storage.sync.get(["subject_list"], function(res) {
+            var sub_list = res.subject_list;
+            if (!sub_list) {
+                console.log("Your subject list is empty!! Hence can't remove any subject.");
+                alert("Your subject list is empty!! Hence can't remove any subject.");
+            } else {
+                var f = false;
+                var aux_sub_list = [];
+                for (var i = 0; i < sub_list.length; i++) {
+                    if (sub_name != sub_list[i]) {
+                        aux_sub_list.push(sub_list[i]);
+                    } else {
+                        f = true;
+                    }
+                }
+                chrome.storage.sync.set({ "subject_list": aux_sub_list }, function() {
+                    if (!f) {
+                        console.log("The subject which you were trying to delete isn't available!!");
+                        alert("The subject which you were trying to delete isn't available!");
+                    } else {
+                        console.log("Subject successfully deleted!!");
+                        alert("Subject successfully deleted!!");
+                    }
+                });
+            }
+        });
+    });
 });
