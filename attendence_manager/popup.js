@@ -19,12 +19,12 @@ $(function() {
             var sub_list = res.subject_list;
             var val = "<table style='border:solid black 5px;'><tr><th> Subject </th><th> Classes Attended </th><th> Total Classes Held </th><th>Mark Attendence</th > <th> Mark Absent </th><th>Remove Subject</th></tr> ";
             for (var i = 0; i < sub_list.length; i++) {
-                val += "<tr><td>" + sub_list[i].sub_name + "</td>";
+                val += "<tr id='" + sub_list[i].sub_name + "'><td>" + sub_list[i].sub_name + "</td>";
                 val += "<td><center>" + sub_list[i].classes_attended + "</center></td>";
                 val += "<td><center>" + sub_list[i].classes_held + "</center></td>";
-                val += "<td><center>" + "<img src='green_tick.jpg' >" + "</center></td>";
-                val += "<td><center>" + "<img src='red_cross.jpg' >" + "</center></td>";
-                val += "<td><center>" + "<img src='trash.png' style = 'width: 40px;'>" + "</center></td>";
+                val += "<td><center>" + "<img src='green_tick.jpg' class='mark_attendence'>" + "</center></td>";
+                val += "<td><center>" + "<img src='red_cross.jpg' class='mark_absent'>" + "</center></td>";
+                val += "<td><center>" + "<img src='trash.png' class='remove_subject' style = 'width: 40px;'>" + "</center></td>";
                 val += "</tr>";
             }
             val += "</table>";
