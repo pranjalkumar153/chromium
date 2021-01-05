@@ -1,0 +1,12 @@
+th,
+td {
+    height: 20px;
+    width: 200px;
+    align-items: center;
+}
+
+img {
+    align-items: center;
+    height: 20px;
+    width: 20px;
+}
