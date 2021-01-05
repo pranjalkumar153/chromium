@@ -2,7 +2,7 @@ $(function() {
     //=====================================================================================//
     //CREATING ID FOR EVERY SUBJECT                                                        //
     //=====================================================================================//
-    // ID INITIALIZED
+    // ID INITIALIZED FOR THE UNITIALIZED CASE
     chrome.storage.sync.get(["sub_id"], function(res) {
         if (!res.sub_id) {
             chrome.storage.sync.set({ "sub_id": 0 });
@@ -36,12 +36,13 @@ $(function() {
     //=====================================================================================//
     $("#add_subject").click(function() {
         var sub_name = $("#subject_name").val();
-        chrome.storage.sync.get(["subject_list"], function(res) {
+        chrome.storage.sync.get(["subject_list", "sub_id"], function(res) {
             var sub_list;
             if (sub_name != "" && sub_name) {
                 var classes_attended = 0;
                 var classes_held = 0;
                 var subject = {
+                    sud_id: res.sub_id,
                     sub_name: sub_name,
                     classes_attended: classes_attended,
                     classes_held: classes_held
@@ -77,6 +78,7 @@ $(function() {
             }
             $("#subject_name").val("");
             location.reload();
+            chrome.storage.sync.set({ "sub_id": res.sub_id + 1 });
         });
     });
     //=====================================================================================//
