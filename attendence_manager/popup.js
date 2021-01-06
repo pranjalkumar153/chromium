@@ -1,5 +1,11 @@
 $(function() {
     //=====================================================================================//
+    //FUNCTION TO CREATE ID FOR DOM MANIPULATION ID FOR EVERY SUBJECT                      //
+    //=====================================================================================//
+    function create_sub_id(sub_name) {
+        return sub_name.split(' ').join('_');
+    }
+    //=====================================================================================//
     //CREATING ID FOR EVERY SUBJECT                                                        //
     //=====================================================================================//
     // ID INITIALIZED FOR THE UNITIALIZED CASE
@@ -19,12 +25,12 @@ $(function() {
             var sub_list = res.subject_list;
             var val = "<table style='border:solid black 5px;'><tr><th> Subject </th><th> Classes Attended </th><th> Total Classes Held </th><th>Mark Attendence</th > <th> Mark Absent </th><th>Remove Subject</th></tr> ";
             for (var i = 0; i < sub_list.length; i++) {
-                val += "<tr id='" + sub_list[i].sub_name + "'><td>" + sub_list[i].sub_name + "</td>";
+                val += "<tr id='" + sub_list[i].sub_name_for_id + "'><td>" + sub_list[i].sub_name + "</td>";
                 val += "<td><center>" + sub_list[i].classes_attended + "</center></td>";
                 val += "<td><center>" + sub_list[i].classes_held + "</center></td>";
                 val += "<td><center>" + "<button class='mark_attendence'><img src='green_tick.jpg'></button>" + "</center></td>";
-                val += "<td><center>" + "<button class='mark_absent><img src='red_cross.jpg'></button>" + "</center></td>";
-                val += "<td><center>" + "<button class='remove_subject' ><img src='trash.png' style = 'width: 40px;'></button>" + "</center></td>";
+                val += "<td><center>" + "<button class='mark_absent'><img src='red_cross.jpg'></button>" + "</center></td>";
+                val += "<td><center>" + "<button class='remove_subject'><img src='trash.png' style = 'width: 40px;'></button>" + "</center></td>";
                 val += "</tr>";
             }
             val += "</table>";
@@ -42,6 +48,7 @@ $(function() {
                 var classes_attended = 0;
                 var classes_held = 0;
                 var subject = {
+                    sub_name_for_id: create_sub_id(sub_name),
                     sud_id: res.sub_id,
                     sub_name: sub_name,
                     classes_attended: classes_attended,
