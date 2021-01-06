@@ -29,6 +29,10 @@ $(function() {
                 val += "<tr id='" + sub_list[i].sub_name_for_id + "'><td>" + sub_list[i].sub_name + "</td>";
                 val += "<td><center>" + sub_list[i].classes_attended + "</center></td>";
                 val += "<td><center>" + sub_list[i].classes_held + "</center></td>";
+                //=====================================================================================//
+                //WILL ADD NUMBER OF CLASSES TO BE SKIPPED AND ATTENDED                                //
+
+                //=====================================================================================//
                 val += "<td><center>" + "<button class='mark_attendence'><img src='green_tick.jpg'></button>" + "</center></td>";
                 val += "<td><center>" + "<button class='mark_absent'><img src='red_cross.jpg'></button>" + "</center></td>";
                 val += "<td><center>" + "<button class='remove_subject'><img src='trash.png' style = 'width: 40px;'></button>" + "</center></td>";
