@@ -42,7 +42,7 @@ $(function() {
                     req = Math.ceil(75 * sub_list[i].classes_held / 100 - sub_list[i].classes_attended);
                     output_str = "You need to attend " + parseInt(req) + " classes to be on track";
                 } else {
-                    req = Math.floor(sub_list[i].classes_attended - 75 * sub_list[i].classes_held / 100);
+                    req = Math.floor(sub_list[i].classes_attended * 100 / 75 - sub_list[i].classes_held);
                     output_str = "You can leave " + parseInt(req) + " classes";
                     if (req == 0) {
                         output_str = "Don't miss the next class";
