@@ -52,4 +52,21 @@ $(function() {
             });
         });
     });
+    //=====================================================================================//
+    //FUNCTIONALITY FOR PERCENTAGE SETTING                                                 //
+    // <div class="input-group">
+    //     <input type="text" class="form-control" placeholder="Enter Percentage" aria-label="Recipient's username with two button addons" id="set_percentage">
+    //     <button class="btn btn-primary" type="button" id="set_percent">Set Percentage</button>
+    // </div>
+    //=====================================================================================//
+    $("#set_percent").click(function() {
+        var percent = $("#set_percentage").val();
+        percent = parseInt(percent);
+        if ((percent) && (percent != "")) {
+            chrome.storage.sync.set({ "percentage": percent }, function() {
+                alert("Percentage set successfully!!");
+                $("#set_percentage").val("");
+            });
+        }
+    });
 });

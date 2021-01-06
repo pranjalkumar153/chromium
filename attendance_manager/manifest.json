@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "version": "1.0",
-    "name": "Attendence Manager",
+    "name": "Attendance Manager",
     "description": "An extension to keep your attendence on track",
     "icons": {
         "128": "attendence.jpg",
