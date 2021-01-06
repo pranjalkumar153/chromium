@@ -1,0 +1,13 @@
+th,
+td {
+    height: 20px;
+    width: 200px;
+    align-items: center;
+    border: 2px solid grey;
+}
+
+img {
+    align-items: center;
+    height: 20px;
+    width: 20px;
+}
