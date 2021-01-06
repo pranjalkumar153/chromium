@@ -30,13 +30,30 @@ $(function() {
                 val += "<td><center>" + sub_list[i].classes_attended + "</center></td>";
                 val += "<td><center>" + sub_list[i].classes_held + "</center></td>";
                 //=====================================================================================//
-                //WILL ADD NUMBER OF CLASSES TO BE SKIPPED AND ATTENDED                                //
-
+                //WILL ADD NUMBER OF CLASSES TO BE SKIPPED AND ATTENDED  
+                var current_percent;
+                if (sub_list[i].classes_held == 0) {
+                    current_percent = 0;
+                } else
+                    current_percent = (sub_list[i].classes_attended / sub_list[i].classes_held) * 100;
+                var req;
+                var output_str;
+                if (current_percent < 75) {
+                    req = Math.ceil(75 * sub_list[i].classes_held / 100 - sub_list[i].classes_attended);
+                    output_str = "You need to attend " + parseInt(req) + " classes to be on track";
+                } else {
+                    req = Math.floor(sub_list[i].classes_attended - 75 * sub_list[i].classes_held / 100);
+                    output_str = "You can leave " + parseInt(req) + " classes";
+                    if (req == 0) {
+                        output_str = "Don't miss the next class";
+                    }
+                }
                 //=====================================================================================//
                 val += "<td><center>" + "<button class='mark_attendence'><img src='green_tick.jpg'></button>" + "</center></td>";
                 val += "<td><center>" + "<button class='mark_absent'><img src='red_cross.jpg'></button>" + "</center></td>";
                 val += "<td><center>" + "<button class='remove_subject'><img src='trash.png' style = 'width: 40px;'></button>" + "</center></td>";
                 val += "</tr>";
+                val += "<tr><td colspan='6'>" + output_str + "</td></tr>";
             }
             val += "</table>";
             $("#attendence_record").html(val);
