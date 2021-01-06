@@ -20,7 +20,7 @@ $(function() {
     //INITIAL CONTENT OF THE PAGE                                                          //
     //=====================================================================================//
     chrome.storage.sync.get(["subject_list"], function(res) {
-        if (!res.subject_list) {
+        if ((!res.subject_list) || (res.subject_list.length == 0)) {
             $("#attendence_record").html("<h6>No record available!!</h6>");
         } else {
             var sub_list = res.subject_list;
